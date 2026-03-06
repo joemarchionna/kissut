@@ -1,0 +1,4 @@
+include *.md
+include requirements/prod.txt
+recursive-include kissut/ *.md *.json
+prune tests/

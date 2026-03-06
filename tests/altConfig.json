@@ -1,0 +1,4 @@
+{
+    "logCfgFile": "wkdir/alt_unittest/logConfig.json",
+    "testCfgFile": "wkdir/alt_unittest/testConfig.json"
+}

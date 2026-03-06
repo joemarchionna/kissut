@@ -1,0 +1,13 @@
+
+# python artifacts
+__pycache__/
+false/
+build/
+dist/
+venv/
+env/
+*.egg-info
+*.pyc
+
+# general artifacts
+wkdir/
