@@ -2,10 +2,12 @@ from kissut.testData.files import dumpData, loadData
 import logging
 import os
 
+ALT_CFG_ENV_VAR = "KISSUT_CFG_FILE"
+
 
 def _getPaths() -> dict:
     d = {"logCfgFile": "wkdir/unittest/logConfig.json", "testCfgFile": "wkdir/unittest/testConfig.json"}
-    altPath = os.getenv("UNITTEST_UTILS_CFG_FILE")
+    altPath = os.getenv(ALT_CFG_ENV_VAR)
     if altPath:
         altData = loadData(altPath, d)
         d.update(altData)
