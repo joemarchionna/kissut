@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.0] - 2026 03 26
+### Added
+- Saves The Log Config To Disk
+- runAltUnittest.sh
+### Changed
+- license and readme files
+
 ## [1.0.0] - 2026 03 06
 ### Added
 - Initial Release Renamed and Ported Over From Personal Project

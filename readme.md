@@ -93,6 +93,10 @@ The dev.txt file includes:
 The run the following to confirm the alternative configuration works, ensuring the unittest configuration and log directories get saved in the wkdir/alt_unittest directory:
 
 ````bash
+    source tests/runAltUnittest.sh
+````
+Does the same thing as
+````bash
     export KISSUT_CFG_FILE="tests/altConfig.json"
     python -m unittest discover -s tests/
 ````
