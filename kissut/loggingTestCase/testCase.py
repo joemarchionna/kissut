@@ -4,6 +4,7 @@ from kissut.testData.data import logConfigFile, loadConfigData
 from kissut.testData.text import randStr
 from types import FunctionType
 from functools import wraps
+import threading
 import unittest
 import logging
 
@@ -15,7 +16,7 @@ def loggingDecorator(testMethod):
     # logMethodAboutToRun is the wrapper function
     @wraps(testMethod)
     def logMethodAboutToRun(*args, **kwargs):
-        lggr = logging.getLogger()
+        lggr = logging.getLogger(__name__)
         # log the name of the test method about to be run
         lggr.debug("---- Running '{}' ----".format(testMethod.__name__))
         _result = testMethod(*args, **kwargs)
@@ -36,14 +37,19 @@ class MethodLoggingClass(type):
         return type.__new__(meta, classname, bases, newClassDict)
 
 
+_THRD_LOCK = threading.Lock()
+
+
 class LoggingTestCase(unittest.TestCase, metaclass=MethodLoggingClass):
     workingDirectory = None
 
     @classmethod
     def setUpClass(cls):
         if not LoggingTestCase.workingDirectory:
-            LoggingTestCase.workingDirectory = initializeLogging(logConfigFilename=logConfigFile())
-        cls.logger = logging.getLogger()
+            with _THRD_LOCK:
+                if not LoggingTestCase.workingDirectory:
+                    LoggingTestCase.workingDirectory = initializeLogging(logConfigFilename=logConfigFile())
+        cls.logger = logging.getLogger(__name__)
         cls.logger.debug("-- Entering {}".format(cls.__name__))
 
     @classmethod

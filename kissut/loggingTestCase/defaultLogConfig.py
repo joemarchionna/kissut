@@ -10,5 +10,6 @@ LOG_DEFAULT_CONFIG = {
             "encoding": "utf-8",
         },
     },
+    "root": {"level": "DEBUG", "handlers": ["file"]},
     "kissut": {"level": "DEBUG", "handlers": ["file"]},
 }

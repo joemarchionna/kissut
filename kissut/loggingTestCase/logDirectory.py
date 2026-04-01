@@ -1,6 +1,7 @@
 from kissut.loggingTestCase.defaultLogConfig import LOG_DEFAULT_CONFIG
-from kissut.testData.files import loadData, dumpData
+from kissut.testData.files import loadData
 from logging.config import dictConfig
+import logging
 import datetime
 import pathlib
 import os
@@ -26,5 +27,6 @@ def initializeLogging(logConfigFilename: str) -> str:
     wkDir = createUnittestWorkDir(wkDir)
     cfg = loadData(logConfigFilename, defaultData=dict(LOG_DEFAULT_CONFIG), saveDefaultIfNotExist=True)
     _modifyRotatingFileName(wkDir + "log.txt", cfg)
+    logging.shutdown()
     dictConfig(cfg)
     return wkDir

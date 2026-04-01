@@ -2,6 +2,9 @@ from kissut.testData.files import dumpData, loadData
 import logging
 import os
 
+_logger = logging.getLogger(__name__)
+_logger.addHandler(logging.NullHandler())
+
 ALT_CFG_ENV_VAR = "KISSUT_CFG_FILE"
 
 
@@ -27,7 +30,7 @@ def logConfigFile() -> str:
     return TEST_PATHS["logCfgFile"]
 
 
-def loadConfigData(fqfn: str = TEST_PATHS["testCfgFile"], defaultData=None, logName: str = None) -> dict:
+def loadConfigData(fqfn: str = TEST_PATHS["testCfgFile"], defaultData=None) -> dict:
     """
     loads a unittest JSON config file from a standard location
 
@@ -41,6 +44,6 @@ def loadConfigData(fqfn: str = TEST_PATHS["testCfgFile"], defaultData=None, logN
     """
     if not os.path.exists(fqfn) and not defaultData:
         dumpData(fqfn, {"key": "value", "dbConn": "host=hostdb dbname=dev user=devusr password=doh!", "data": {}})
-        logging.getLogger(logName).critical("Config File '{}' Didn't Exist, Edit Appropriately And Run Tests Again".format(fqfn))
+        _logger.critical("Config File '{}' Didn't Exist, Edit Appropriately And Run Tests Again".format(fqfn))
         exit()
     return loadData(fqfn, defaultData)
